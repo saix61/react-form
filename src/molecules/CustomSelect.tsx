@@ -73,7 +73,7 @@ export function CustomSelect(props: TCustomSelect) {
               );
               if (inputValue !== "" && !isExisting) {
                 filtered.push({
-                  id: "0",
+                  id: "new",
                   name: inputValue,
                 });
               }
@@ -82,7 +82,7 @@ export function CustomSelect(props: TCustomSelect) {
             }}
             getOptionLabel={(option) => {
               return option?.id
-                ? option?.id === "0"
+                ? option?.id === "new"
                   ? `Add "${option.name}"`
                   : !multiple
                   ? option.name
@@ -105,7 +105,7 @@ export function CustomSelect(props: TCustomSelect) {
                 if (isArray(data)) {
                   const newData: ApplicantIndividualCompanyOption[] = [];
                   newData.push(...data);
-                  if (data?.find((obj) => obj.id === "0")) {
+                  if (data?.find((obj) => obj.id === "new")) {
                     newData[newData.length - 1].id = String(
                       new Date().getTime()
                     );
@@ -120,7 +120,7 @@ export function CustomSelect(props: TCustomSelect) {
                 } else if (typeof data === "object" && data?.name) {
                   const newData = data;
 
-                  if (data.id === "0") {
+                  if (data.id === "new") {
                     newData.id = String(new Date().getTime());
                   }
                   setOptionList((oldOptions) =>
@@ -148,9 +148,9 @@ export function CustomSelect(props: TCustomSelect) {
               >
                 <Grid container alignItems={"Stretch"}>
                   <Grid item xs={11}>
-                    {option.id === "0" ? `Add "${option.name}"` : option.name}
+                    {option.id === "new" ? `Add "${option.name}"` : option.name}
                   </Grid>
-                  {option.id !== "0" && (
+                  {option.id !== "new" && (
                     <Grid item xs={1}>
                       <Button
                         fullWidth
