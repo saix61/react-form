@@ -1,30 +1,26 @@
-# React + TypeScript + Vite
+# React Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Инструкция по запуску
 
-Currently, two official plugins are available:
+1. Склонируйте репозиторий на свой локальный компьютер.
+2. Установите все зависимости, выполнив команду `npm install`.
+3. Запустите проект, используя команду `npm run dev`.
+4. Проект запуститься по адресу `http://localhost:5173/`.
+5. Начните заполнять форму.
+6. Для добавления нового значения в первые 2 поля начните вводить произвольный текст. Если нет совпадений, вам будет предложено добавить этот текст в список поля.
+7. Для удаления пункта из списка, нажмите на иконку корзины, которая находится справа в выпадающем списке поля.
+8. Для отправки формы заполните обязательные поля и нажмите кнопку `SUBMIT`. Кнопка станет активное только если все обязательные поля будут заполнены.
+9. Если обязательное поле будет пустое, то внутри поля отобразится ошибка валидации.
+10. После отправки формы, данные из формы будет отображены в консоли бразера.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Используемые технологии
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- React
+- TypeScript
+- Vite
+- React Hook Form
+- GraphQL
+- GraphQL Code Generator
+- Apollo
+- MUI
+- ESLint / Prettier
