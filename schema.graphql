@@ -1,0 +1,26 @@
+type ApplicantIndividualCompanyPosition {
+  id: ID!
+  name: String!
+}
+
+type ApplicantIndividualCompanyRelation {
+  id: ID!
+  name: String!
+}
+
+union ApplicantIndividualCompanyOption =
+    ApplicantIndividualCompanyPosition
+  | ApplicantIndividualCompanyRelation
+
+type ApplicantIndividualCompanyPositionData {
+  data: [ApplicantIndividualCompanyPosition!]!
+}
+
+type ApplicantIndividualCompanyRelationData {
+  data: [ApplicantIndividualCompanyRelation!]!
+}
+
+type Query {
+  applicantIndividualCompanyPositions: ApplicantIndividualCompanyPositionData!
+  applicantIndividualCompanyRelations: ApplicantIndividualCompanyRelationData!
+}

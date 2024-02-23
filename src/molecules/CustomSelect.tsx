@@ -1,7 +1,7 @@
 import { Control, Controller, FieldValues } from "react-hook-form";
+import { ApplicantIndividualCompanyOption } from "../generated/types";
 
 import { Delete } from "@mui/icons-material";
-import { TOption, TOptionList } from "../App";
 import { useEffect, useState } from "react";
 import { isArray } from "@apollo/client/utilities";
 import {
@@ -12,12 +12,12 @@ import {
   TextField,
 } from "@mui/material";
 
-const filter = createFilterOptions<TOption>();
+const filter = createFilterOptions<ApplicantIndividualCompanyOption>();
 
 export type TCustomSelect = {
   name: string;
   label: string;
-  options: TOptionList;
+  options: ApplicantIndividualCompanyOption[];
   control: Control<FieldValues>;
   autocompleteReset: boolean;
   multiple?: boolean;
@@ -38,10 +38,11 @@ export function CustomSelect(props: TCustomSelect) {
   const preventOnChange: { state: boolean } = {
     state: false,
   };
-  const [optionList, setOptionList] = useState<TOptionList>(options);
-  const [fieldValue, setFieldValue] = useState<TOption | TOptionList | null>(
-    []
-  );
+  const [optionList, setOptionList] =
+    useState<ApplicantIndividualCompanyOption[]>(options);
+  const [fieldValue, setFieldValue] = useState<
+    ApplicantIndividualCompanyOption | ApplicantIndividualCompanyOption[] | null
+  >([]);
 
   useEffect(() => {
     setOptionList(options);
@@ -72,7 +73,7 @@ export function CustomSelect(props: TCustomSelect) {
               );
               if (inputValue !== "" && !isExisting) {
                 filtered.push({
-                  id: 0,
+                  id: "0",
                   name: inputValue,
                 });
               }
@@ -81,7 +82,7 @@ export function CustomSelect(props: TCustomSelect) {
             }}
             getOptionLabel={(option) => {
               return option?.id
-                ? option?.id == 0
+                ? option?.id === "0"
                   ? `Add "${option.name}"`
                   : !multiple
                   ? option.name
@@ -102,10 +103,12 @@ export function CustomSelect(props: TCustomSelect) {
                 preventOnChange.state = false;
               } else {
                 if (isArray(data)) {
-                  const newData: TOptionList = [];
+                  const newData: ApplicantIndividualCompanyOption[] = [];
                   newData.push(...data);
-                  if (data?.find((obj) => obj.id === 0)) {
-                    newData[newData.length - 1].id = new Date().getTime();
+                  if (data?.find((obj) => obj.id === "0")) {
+                    newData[newData.length - 1].id = String(
+                      new Date().getTime()
+                    );
                   }
                   setOptionList((oldOptions) =>
                     [...oldOptions, ...newData].filter(
@@ -117,8 +120,8 @@ export function CustomSelect(props: TCustomSelect) {
                 } else if (typeof data === "object" && data?.name) {
                   const newData = data;
 
-                  if (data.id === 0) {
-                    newData.id = new Date().getTime();
+                  if (data.id === "0") {
+                    newData.id = String(new Date().getTime());
                   }
                   setOptionList((oldOptions) =>
                     [...oldOptions, newData].filter(
@@ -145,9 +148,9 @@ export function CustomSelect(props: TCustomSelect) {
               >
                 <Grid container alignItems={"Stretch"}>
                   <Grid item xs={11}>
-                    {option.id === 0 ? `Add "${option.name}"` : option.name}
+                    {option.id === "0" ? `Add "${option.name}"` : option.name}
                   </Grid>
-                  {option.id !== 0 && (
+                  {option.id !== "0" && (
                     <Grid item xs={1}>
                       <Button
                         fullWidth
@@ -162,7 +165,8 @@ export function CustomSelect(props: TCustomSelect) {
                           setOptionList((oldOptions) => {
                             if (isArray(oldOptions)) {
                               return oldOptions?.filter(
-                                (item: TOption) => item !== option
+                                (item: ApplicantIndividualCompanyOption) =>
+                                  item !== option
                               );
                             }
                             return oldOptions;
@@ -170,7 +174,8 @@ export function CustomSelect(props: TCustomSelect) {
 
                           if (isArray(fieldValue)) {
                             const newVal = fieldValue?.filter(
-                              (item: TOption) => item.id !== option.id
+                              (item: ApplicantIndividualCompanyOption) =>
+                                item.id !== option.id
                             );
 
                             setFieldValue(newVal);

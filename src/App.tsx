@@ -10,29 +10,13 @@ import {
   Typography,
 } from "@mui/material";
 import { CustomSelect } from "./molecules/CustomSelect";
-import { GET_DATA_QUERY } from "./queries";
+import { GET_DATA_QUERY } from "./gql/queries";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
-
-export type TOption = {
-  id: number;
-  name: string;
-};
-
-export type TRelation = TOption;
-export type TPosition = TOption;
-
-export type TOptionList = TPosition[] | TRelation[];
+import { Query } from "./generated/types";
 
 function App() {
-  const { data: response, loading } = useQuery<{
-    applicantIndividualCompanyPositions: {
-      data: TOptionList;
-    };
-    applicantIndividualCompanyRelations: {
-      data: TOptionList;
-    };
-  }>(GET_DATA_QUERY);
+  const { data: response, loading } = useQuery<Query>(GET_DATA_QUERY);
 
   const {
     reset,
